@@ -1,7 +1,12 @@
 import SignIn from '@/components/common/SignIn'
+import Header from '@/components/common/Header'
+import Footer from '@/components/common/Footer'
 
 export const common = {
   path: '/common/signin',
-  name: 'SignIn',
-  component: SignIn
+  components: {
+    default: SignIn,
+    header: Header,
+    footer: Footer
+  }
 }

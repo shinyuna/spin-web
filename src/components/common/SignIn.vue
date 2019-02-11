@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { eventBus } from '../../event'
 export default {
   name: 'SignIn',
   data () {
@@ -25,7 +26,8 @@ export default {
       email: '',
       emailError: '',
       pw: '',
-      pwError: ''
+      pwError: '',
+      message: '로그인'
     }
   },
   methods: {
@@ -61,86 +63,93 @@ export default {
         alert(e.message)
       }
     }
+  },
+  created () {
+    eventBus.$emit('title', '로그인')
   }
 }
 </script>
 
-<style scoped>
-  #main{
-    width: 100%;
-    height: 100%;
-  }
-  .signin_box{
-    position: absolute;
-    width: 520px;
-    height: 600px;
-    left: 50%;
-    top: 50%;
-    border-radius: 8px;
-    box-shadow: 12.2px 19.5px 9.6px 0.4px rgba(0, 0, 0, 0.13);
-    background-color: #f8f8fb;
-    transform: translate(-50%,-50%);
-  }
-  .login_tit{
-    position: relative;
-    text-align: center;
-    line-height: 80px;
-    margin-top: 20px;
-    font-size: 2em;
-  }
-  .login_tit::before{
-    content: '';
-    position: absolute;
-    width: 48px;
-    height: 1px;
-    background-color: #00aa87;
-    bottom: -0;
-    margin-left: 25px;
-  }
-  .signin_wrap {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 70px;
-  }
-  .signin_wrap  > input{
-    width: 443px;
-    height: 58px;
-    border: none;
-    background: none;
-    border-bottom: 1px solid #cbcbcb;
-    margin-top: 10px;
-    padding: 20px;
-  }
-  .signin_wrap > input:focus{
-    border-bottom: 1px solid #00aa87;
-    transition: 0.5s ease;
-  }
-  .signin_wrap > button{
-    width: 443px;
-    height: 58px;
-    border: none;
-    margin-top: 30px;
-    background-color: #108a7a;
-    color: #fff;
-  }
-  .signin_wrap > button:hover{
-    background-color: transparent;
-    color: #9b9b9b;
-    font-weight: 600;
-    border: 2px solid #9b9b9b;
-    transition: all 0.3s ease;
-  }
+<style>
+body{
+  background-color: rgba(0,0,0,0.3);
+}
+/* main */
+#main{
+  width: 100%;
+  height: 100%;
+}
+.signin_box{
+  position: absolute;
+  width: 520px;
+  height: 600px;
+  left: 50%;
+  top: 50%;
+  border-radius: 8px;
+  box-shadow: 12.2px 19.5px 9.6px 0.4px rgba(0, 0, 0, 0.13);
+  background-color: #f8f8fb;
+  transform: translate(-50%,-50%);
+}
+.login_tit{
+  position: relative;
+  text-align: center;
+  line-height: 80px;
+  margin-top: 20px;
+  font-size: 2em;
+}
+.login_tit::before{
+  content: '';
+  position: absolute;
+  width: 48px;
+  height: 1px;
+  background-color: #00aa87;
+  bottom: -0;
+  margin-left: 25px;
+}
+.signin_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 70px;
+}
+.signin_wrap  > input{
+  width: 443px;
+  height: 58px;
+  border: none;
+  background: none;
+  border-bottom: 1px solid #cbcbcb;
+  margin-top: 10px;
+  padding: 20px;
+}
+.signin_wrap > input:focus{
+  border-bottom: 1px solid #00aa87;
+  transition: 0.5s ease;
+}
+.signin_wrap > button{
+  width: 443px;
+  height: 58px;
+  border: none;
+  margin-top: 30px;
+  background-color: #108a7a;
+  color: #fff;
+}
+.signin_wrap > button:hover{
+  background-color: transparent;
+  color: #9b9b9b;
+  font-weight: 600;
+  border: 2px solid #9b9b9b;
+  transition: all 0.3s ease;
+}
 
-  .other_wrap{
-    text-align: right;
-    padding: 15px 40px;
-  }
-  .other_wrap > a{
-    font-size: 12px;
-    color: #999999;
-  }
-  .other_wrap > a:hover{
-    text-decoration: underline;
-  }
+.other_wrap{
+  text-align: right;
+  padding: 15px 40px;
+}
+.other_wrap > a{
+  font-size: 12px;
+  color: #999999;
+}
+.other_wrap > a:hover{
+  text-decoration: underline;
+}
 </style>
