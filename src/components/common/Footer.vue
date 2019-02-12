@@ -1,6 +1,6 @@
 <template>
   <div id="footer">
-    <p> footer</p>
+    <p> COPYRIGHT SPIN PROTOCOL. ALL RIGHTS RESERVED. </p>
   </div>
 </template>
 

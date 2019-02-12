@@ -8,63 +8,63 @@
           <div class="form_left">
             <div class="input_wrap">
               <label for="company_name">회사명<sup>*</sup></label>
-              <input type="text" name="company_name" id="company_name">
+              <input type="text" v-model='company_name' name="company_name" id="company_name">
             </div>
             <div class="input_wrap">
               <label for="brand_name">브랜드 명</label>
-              <input type="text" name="brand_name" id="brand_name">
+              <input type="text" v-model='brand_name' name="brand_name" id="brand_name">
             </div>
             <div class="input_wrap">
               <label for="ceo_name">대표자 명<sup>*</sup></label>
-              <input type="text" name="ceo_name" id="ceo_name">
+              <input type="text" v-model='ceo_name' name="ceo_name" id="ceo_name">
             </div>
             <div class="input_wrap">
               <label for="business_num">사업자등록 번호<sup>*</sup></label>
-              <input type="text" name="business_num" id="business_num">
+              <input type="text" v-model='business_num' name="business_num" id="business_num">
             </div>
           </div>
           <div class="form_right">
             <div class="input_wrap">
               <label for="event">종목<sup>*</sup></label>
-              <input type="text" name="event" class="event" id="event">
+              <input type="text" v-model='event' name="event" class="event" id="event">
             </div>
             <div class="input_wrap input_margin">
               <label for="industry">업태<sup>*</sup></label>
-              <input type="text" name="industry" class="industry" id="industry">
+              <input type="text" v-model='industry' name="industry" class="industry" id="industry">
             </div>
             <div class="input_wrap">
               <label for="phone_num">전화번호<sup>*</sup></label>
-              <input type="text" name="phone_num" id="phone_num">
+              <input type="text" v-model='phone_num' name="phone_num" id="phone_num">
             </div>
             <div class="input_wrap">
               <label for="post_code">회사 주소<sup>*</sup></label>
-              <input type="text" name="post_code" class="post_code" id="post_code">
-              <button type="button" class="sch_add_btn">주소검색</button>
-              <input type="text" name="address" class="address">
+              <input type="text" v-model='post_code' name="post_code" class="post_code" id="post_code">
+              <button type="button" v-on:click='showPost' class="sch_add_btn">주소검색</button>
+              <input type="text" v-model='address' name="address" class="address">
+              <div id="sample"></div>
             </div>
           </div>
         </div>
         <!-- 회원정보 입력 폼 끝  -->
-
         <!-- 계정 입력 -->
         <div class="account">
           <h2 class="form_tit">계정 만들기</h2>
           <div class="form">
             <div class="input_wrap">
               <label for="id">ID<sup>*</sup></label>
-              <input type="text" name="id" class="id" id="id" placeholder="sample@sample.com">
-              <button type="button" class="id_chk_btn">중복확인</button>
-              <p class="error id_error"></p>
+              <input type="text" v-model='id' name="id" class="id" id="id" placeholder="sample@sample.com">
+              <button type="button" v-on:click='checkId' class="id_chk_btn">중복확인</button>
+              <p class="error">{{ id_error }}</p>
             </div>
             <div class="input_wrap">
               <label for="password">비밀번호<sup>*</sup></label>
-              <input type="password" name="password" id="password">
-              <p class="error password_error"></p>
+              <input type="password" v-model='password' name="password" id="password">
+              <p class="error">{{ password_error }}</p>
             </div>
             <div class="input_wrap">
               <label for="password_chk">비밀번호 확인<sup>*</sup></label>
-              <input type="password" name="password_chk" id="password_chk">
-              <p class="error password_chk_error"></p>
+              <input type="password" v-model='password_chk' name="password_chk" @input="onKeyup" id="password_chk">
+              <p class="error">{{ password_chk_error }}</p>
             </div>
             <ul class="notice">
               <li>* 영문, 숫자, 특수문자 혼합 8자리 이상</li>
@@ -125,21 +125,140 @@
         <!-- 이용약관 끝 -->
         <div class="clear"></div>
         <div class="submit_wrap">
-          <button type="button" class="submit_btn">가입하기</button>
+          <button type="button" v-on:click="signup" class="submit_btn">가입하기</button>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
 <script>
+import { eventBus } from '../../event'
+import Modal from './Modal'
+
 export default {
-  name: 'AdvSignUp'
+  name: 'AdvSignUp',
+  data () {
+    return {
+      id: null,
+      password: null,
+      company_name: null,
+      brand_name: null,
+      ceo_name: null,
+      business_num: null,
+      event: null,
+      industry: null,
+      phone_num: null,
+      post_code: null,
+      address: null,
+      password_chk: null,
+      password_chk_error: null,
+      showModal: false
+    }
+  },
+  components: {
+    Modal: Modal
+  },
+  computed: {
+    id_error: function () {
+      const idReg = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/
+      if (!this.id) {
+        return ''
+      } else if (!idReg.test(this.id)) {
+        return '이메일 형식을 지켜주세요'
+      }
+      return ''
+    },
+    password_error: function () {
+      const pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+      if (!this.password) {
+        return ''
+      } else if (!pwReg.test(this.password)) {
+        return '비밀번호 형식을 지켜주세요'
+      }
+      return ''
+    }
+  },
+  methods: {
+    showPost () {
+      // new daum.Postcode({
+      //   oncomplete: function (data) {
+      //     let fullAddr = null
+      //     let extraAddr = null
+      //
+      //     if (data.userSelectedType === 'R') {
+      //       fullAddr = data.roadAddress
+      //     } else {
+      //       fullAddr = data.jibunAddress
+      //     }
+      //
+      //     if (data.userSelectedType === 'R') {
+      //       if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+      //         extraAddr += data.bname
+      //       }
+      //       if (data.buildingName !== '' && data.apartment === 'Y') {
+      //         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName)
+      //       }
+      //       fullAddr += (extraAddr !== '' ? ' (' + extraAddr + ')' : '')
+      //     }
+      //     console.log(data.zonecode)
+      //   }
+      // }).open();
+    },
+    onKeyup ({ target }) {
+      if (!this.password) {
+        this.password_chk = ''
+        this.password_chk_error = '비밀번호를 먼저 입력해주세요.'
+      } else if (this.password === target.value) {
+        this.password_chk_error = ''
+      } else {
+        this.password_chk_error = '비밀번호가 일치 하지 않습니다.'
+      }
+    },
+    async signup () {
+      try {
+        await this.$http.post(
+          '/api/advertiser/adv_signup',
+          {
+            id: this.id,
+            password: this.password,
+            company_name: this.company_name,
+            brand_name: this.brand_name,
+            ceo_name: this.ceo_name,
+            business_num: this.business_num,
+            event: this.event,
+            industry: this.industry,
+            phone_num: this.phone_num,
+            post_code: this.post_code,
+            address: this.address
+          })
+        window.location.replace = '/advertiser/adv_signup_complete/'
+      } catch (e) {
+        alert(e.message)
+      }
+    },
+    async checkId () {
+      try {
+        await this.$http.post(
+          '/api/advertiser/adv_check_id',
+          {
+            id: this.id
+          })
+        this.id_error = '사용가능한 아이디입니다.'
+      } catch (e) {
+        alert(e.message)
+      }
+    }
+  },
+  created () {
+    eventBus.$emit('account', '회원가입')
+  }
+
 }
 </script>
 
 <style scoped>
-
   .container{
     width: 1470px;
     min-width: 1470px;
@@ -270,6 +389,7 @@ export default {
     border-radius: 8px;
     background-color: #ffffff;
   }
+
   /* 계정정보 */
   .account{
     float: right;
@@ -290,6 +410,7 @@ export default {
     font-size: 12px;
     color: #74767d;
   }
+
   /* 제출 button */
   .submit_wrap{
     display: flex;

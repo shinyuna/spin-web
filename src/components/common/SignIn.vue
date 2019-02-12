@@ -3,15 +3,19 @@
     <div class="signin_box">
       <p class="login_tit">SIGN IN</p>
       <div class="signin_wrap">
-        <input type="text" v-model='email' @input="onChange" class="id">
+        <input type="text" v-model='email' class="id">
         <span class="id_error">{{ emailError }}</span>
-        <input type="password" v-model='pw' @input="onChange" class="pw">
+        <input type="password" v-model='pw' class="pw">
         <span class="id_error">{{ pwError }}</span>
         <button v-on:click="signin" class="signin_btn">로그인</button>
       </div>
       <div class="other_wrap">
-        <router-link to="/common/signUp" class="btn signup">회원가입</router-link>
-        <router-link to="/common/find_user" class="btn find_user">아이디, 비밀번호 찾기</router-link>
+        <button id="show-modal" @click="showModal = true" class="btn signup">회원 가입</button>
+        <modal v-if="showModal" @close="showModal = false"></modal>
+<!--
+        <router-link to="/common/signup_popup" class="btn signup">회원가입</router-link>
+-->
+        <router-link to="/common/find_user" class="btn find_user">아이디/비밀번호 찾기</router-link>
       </div>
     </div>
   </div>
@@ -19,37 +23,42 @@
 
 <script>
 import { eventBus } from '../../event'
+import Modal from '../advertiser/Modal'
+
 export default {
   name: 'SignIn',
   data () {
     return {
       email: '',
-      emailError: '',
       pw: '',
-      pwError: '',
-      message: '로그인'
+      message: '로그인',
+      showModal: false
     }
   },
+  components: {
+    Modal: Modal
+  },
   methods: {
-    onChange ({ target }) {
-      (target.classList.value === 'id') ? this.validationId(target.value.trim()) : this.validationPw(target.value.trim())
-    },
-    validationId (value) {
-      const idReg = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/
-      if (!idReg.test(value.trim())) {
-        this.emailError = '이메일 형식을 지켜주세요'
-      } else {
-        this.emailError = ''
-      }
-    },
-    validationPw (value) {
-      const pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-      if (!pwReg.test(value.trim())) {
-        this.pwError = '비밀번호 형식을 지켜주세요'
-      } else {
-        this.pwError = ''
-      }
-    },
+
+    // onChange ({ target }) {
+    //   (target.classList.value === 'id') ? this.validationId(target.value.trim()) : this.validationPw(target.value.trim())
+    // },
+    // validationId (value) {
+    //   const idReg = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/
+    //   if (!idReg.test(value.trim())) {
+    //     this.emailError = '이메일 형식을 지켜주세요'
+    //   } else {
+    //     this.emailError = ''
+    //   }
+    // },
+    // validationPw (value) {
+    //   const pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+    //   if (!pwReg.test(value.trim())) {
+    //     this.pwError = '비밀번호 형식을 지켜주세요'
+    //   } else {
+    //     this.pwError = ''
+    //   }
+    // },
     async signin () {
       try {
         await this.$http.post(
@@ -65,15 +74,12 @@ export default {
     }
   },
   created () {
-    eventBus.$emit('title', '로그인')
+    eventBus.$emit('account', '로그인')
   }
 }
 </script>
 
-<style>
-body{
-  background-color: rgba(0,0,0,0.3);
-}
+<style scoped>
 /* main */
 #main{
   width: 100%;

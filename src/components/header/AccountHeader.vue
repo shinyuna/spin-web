@@ -1,5 +1,10 @@
 <template>
   <div id="header">
+    <h1 class="logo">
+      <a href="/">
+        <img src="https://s3.ap-northeast-2.amazonaws.com/spin-protocol-resource/resources/images/spin-logo1/group-17.png" srcset="https://s3.ap-northeast-2.amazonaws.com/spin-protocol-resource/resources/images/spin-logo1/group-17%402x.png, https://s3.ap-northeast-2.amazonaws.com/spin-protocol-resource/resources/images/spin-logo1/group-17%403x.png" class="logo" alt="spinprotocol_logo">
+      </a>
+    </h1>
     <p class="title">{{ message }}</p>
   </div>
 </template>
@@ -8,14 +13,14 @@
 import { eventBus } from '../../event'
 
 export default {
-  name: 'Header',
+  name: 'AccountHeader',
   data () {
     return {
       message: ''
     }
   },
   created () {
-    eventBus.$on('title', data => {
+    eventBus.$on('account', data => {
       this.message = data
     })
   }
@@ -27,8 +32,7 @@ export default {
   #header{
     width: 100%;
     height: 70px;
-    background: transparent;
-    box-shadow: none;
+    background-color: #1f263e !important;
   }
   #header .logo{
     float: left;
