@@ -1,6 +1,6 @@
 /** Header */
 import AccountHeader from '@/components/header/AccountHeader'
-import AdvHeader from '@/components/header/AdvHeader'
+import Header from '@/components/header/Header'
 /** Content */
 import AdvSignUp from '@/components/advertiser/SignUp'
 import AdvCampaignManagement from '@/components/advertiser/AdvCampaignManagement'
@@ -20,7 +20,7 @@ export const advertiser = [
     path: '/advertiser/adv_campaign_management',
     name: 'AdvCampaignManagement',
     components: {
-      header: AdvHeader,
+      header: Header,
       nav: AdvNav,
       default: AdvCampaignManagement
     }
