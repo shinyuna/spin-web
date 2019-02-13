@@ -17,7 +17,7 @@
           </div>
           <div class="modal-footer">
             <slot name="footer">
-              <button class="modal-default-button" @click="$emit('close')"> 취소 </button>
+              <button class="modal-default-button" @click="$emit('close')">&#10006;</button>
             </slot>
           </div>
         </div>
@@ -51,6 +51,7 @@ export default {
   }
 
   .modal-container {
+    position: relative;
     width: 600px;
     margin: 0px auto;
     padding: 20px 30px;
@@ -73,7 +74,12 @@ export default {
   }
 
   .modal-default-button {
-    float: right;
+    position: absolute;
+    right: 5px;
+    font-size: 20px;
+    bottom: 5px;
+    border: none;
+    cursor: pointer;
   }
   .modal-enter {
     opacity: 0;

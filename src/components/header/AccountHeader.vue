@@ -1,9 +1,9 @@
 <template>
   <div id="header">
     <h1 class="logo">
-      <a href="/">
+      <router-link to="/">
         <img src="https://s3.ap-northeast-2.amazonaws.com/spin-protocol-resource/resources/images/spin-logo1/group-17.png" srcset="https://s3.ap-northeast-2.amazonaws.com/spin-protocol-resource/resources/images/spin-logo1/group-17%402x.png, https://s3.ap-northeast-2.amazonaws.com/spin-protocol-resource/resources/images/spin-logo1/group-17%403x.png" class="logo" alt="spinprotocol_logo">
-      </a>
+      </router-link>
     </h1>
     <p class="title">{{ message }}</p>
   </div>
@@ -28,11 +28,10 @@ export default {
 </script>
 
 <style scoped>
-  /* header */
   #header{
     width: 100%;
     height: 70px;
-    background-color: #1f263e !important;
+    background-color: #1f263e;
   }
   #header .logo{
     float: left;

@@ -254,7 +254,6 @@ export default {
   created () {
     eventBus.$emit('account', '회원가입')
   }
-
 }
 </script>
 
@@ -263,32 +262,6 @@ export default {
     width: 1470px;
     min-width: 1470px;
     margin: 0 auto;
-  }
-  /* header */
-  #header{
-    width: 100%;
-    height: 70px;
-    background-color: #1f263e !important;
-  }
-  #header .logo{
-    float: left;
-    width: 174px;
-    height: 70px;
-    padding-left: 20px;
-    object-fit: contain;
-  }
-  #header .logo a{
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  .title{
-    float: right;
-    width: 70px;
-    margin-right: 30px;
-    line-height: 70px;
-    color: #eaedf8;
-    font-weight: 500;
   }
 
   /* 회원가입 카테고리 버튼 */

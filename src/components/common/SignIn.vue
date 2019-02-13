@@ -1,5 +1,6 @@
 <template>
   <div id="main">
+    <modal v-if="showModal" @close="showModal = false"></modal>
     <div class="signin_box">
       <p class="login_tit">SIGN IN</p>
       <div class="signin_wrap">
@@ -10,11 +11,8 @@
         <button v-on:click="signin" class="signin_btn">로그인</button>
       </div>
       <div class="other_wrap">
-        <button id="show-modal" @click="showModal = true" class="btn signup">회원 가입</button>
-        <modal v-if="showModal" @close="showModal = false"></modal>
-<!--
-        <router-link to="/common/signup_popup" class="btn signup">회원가입</router-link>
--->
+        <!-- <button id="show-modal" @click="showModal = true" class="btn signup">회원 가입</button> -->
+        <a class="btn signup" @click="showModal = true">회원가입</a>
         <router-link to="/common/find_user" class="btn find_user">아이디/비밀번호 찾기</router-link>
       </div>
     </div>
@@ -81,10 +79,6 @@ export default {
 
 <style scoped>
 /* main */
-#main{
-  width: 100%;
-  height: 100%;
-}
 .signin_box{
   position: absolute;
   width: 520px;
@@ -93,7 +87,7 @@ export default {
   top: 50%;
   border-radius: 8px;
   box-shadow: 12.2px 19.5px 9.6px 0.4px rgba(0, 0, 0, 0.13);
-  background-color: #f8f8fb;
+  background-color: #fff;
   transform: translate(-50%,-50%);
 }
 .login_tit{
@@ -109,7 +103,7 @@ export default {
   width: 48px;
   height: 1px;
   background-color: #00aa87;
-  bottom: -0;
+  bottom: 0;
   margin-left: 25px;
 }
 .signin_wrap {
@@ -146,16 +140,18 @@ export default {
   border: 2px solid #9b9b9b;
   transition: all 0.3s ease;
 }
-
 .other_wrap{
   text-align: right;
   padding: 15px 40px;
 }
-.other_wrap > a{
+.other_wrap > a, .signup{
   font-size: 12px;
   color: #999999;
 }
 .other_wrap > a:hover{
   text-decoration: underline;
+}
+.signup{
+  border: none;
 }
 </style>
