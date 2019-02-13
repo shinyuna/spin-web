@@ -134,7 +134,7 @@
 </template>
 
 <script>
-import { eventBus } from '../../event'
+import { eventBus } from '../../../event'
 import Modal from './Modal'
 
 export default {
@@ -218,22 +218,28 @@ export default {
     },
     async signup () {
       try {
-        await this.$http.post(
-          '/api/advertiser/adv_signup',
-          {
+        const result = await this.$http.post(
+          '/api/common/signup',
+          JSON.stringify({
             id: this.id,
-            password: this.password,
-            company_name: this.company_name,
-            brand_name: this.brand_name,
-            ceo_name: this.ceo_name,
-            business_num: this.business_num,
-            event: this.event,
-            industry: this.industry,
-            phone_num: this.phone_num,
-            post_code: this.post_code,
-            address: this.address
+            pw: this.password
           })
-        window.location.replace = '/advertiser/adv_signup_complete/'
+        )
+        if (result.data.response) {
+          throw result.data;
+        }
+        window.location.href = '/common/signin'
+        /**
+         * company_name: this.company_name,
+         brand_name: this.brand_name,
+         ceo_name: this.ceo_name,
+         business_num: this.business_num,
+         event: this.event,
+         industry: this.industry,
+         phone_num: this.phone_num,
+         post_code: this.post_code,
+         address: this.address
+         */
       } catch (e) {
         alert(e.message)
       }

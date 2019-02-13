@@ -5,9 +5,7 @@
       <p class="login_tit">SIGN IN</p>
       <div class="signin_wrap">
         <input type="text" v-model='email' class="id">
-        <span class="id_error">{{ emailError }}</span>
         <input type="password" v-model='pw' class="pw">
-        <span class="id_error">{{ pwError }}</span>
         <button v-on:click="signin" class="signin_btn">로그인</button>
       </div>
       <div class="other_wrap">
@@ -20,7 +18,7 @@
 </template>
 
 <script>
-import { eventBus } from '../../event'
+import { eventBus } from '../../../event'
 import Modal from '../advertiser/Modal'
 
 export default {
@@ -37,35 +35,15 @@ export default {
     Modal: Modal
   },
   methods: {
-
-    // onChange ({ target }) {
-    //   (target.classList.value === 'id') ? this.validationId(target.value.trim()) : this.validationPw(target.value.trim())
-    // },
-    // validationId (value) {
-    //   const idReg = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/
-    //   if (!idReg.test(value.trim())) {
-    //     this.emailError = '이메일 형식을 지켜주세요'
-    //   } else {
-    //     this.emailError = ''
-    //   }
-    // },
-    // validationPw (value) {
-    //   const pwReg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
-    //   if (!pwReg.test(value.trim())) {
-    //     this.pwError = '비밀번호 형식을 지켜주세요'
-    //   } else {
-    //     this.pwError = ''
-    //   }
-    // },
     async signin () {
       try {
-        await this.$http.post(
-          `posts`, // url
-          { // body
-            email: this.email,
-            pw: this.pw
-          })
-        window.location.href = '/'
+        // await this.$http.post(
+        //   `posts`, // url
+        //   { // body
+        //     email: this.email,
+        //     pw: this.pw
+        //   })
+        this.$router.push('/advertiser/adv_campaign_management')
       } catch (e) {
         alert(e.message)
       }

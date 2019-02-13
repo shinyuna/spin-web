@@ -5,8 +5,8 @@ import router from './router'
 import axios from 'axios'
 
 Vue.prototype.$http = axios.create({
-  baseURL: 'http://jsonplaceholder.typicode.com'
-  // baseURL: 'http://localhost:8080'
+  baseURL: 'https://fkj21yja89.execute-api.ap-northeast-2.amazonaws.com/Stage',
+  timeout: 10000
 })
 
 Vue.config.productionTip = false
