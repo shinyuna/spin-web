@@ -31,7 +31,7 @@ export const advertiser = [
     path: '/advertiser/adv_my_info',
     name: 'AdvMyInfo',
     components: {
-      header: AdvHeader,
+      header: Header,
       nav: AdvNav,
       default: AdvMyInfo
     }
@@ -40,7 +40,7 @@ export const advertiser = [
     path: '/advertiser/adv_campaign_registration',
     name: 'AdvRegistration',
     components: {
-      header: AdvHeader,
+      header: Header,
       nav: AdvNav,
       default: AdvRegistration
     }

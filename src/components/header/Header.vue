@@ -21,6 +21,6 @@
 
 <script>
     export default {
-        name: 'AdvCampaignManagement'
+        name: 'Header'
     }
 </script>
