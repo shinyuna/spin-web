@@ -11,7 +11,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "deploy": "npm run build && aws s3 sync dist/ s3://spin-web-bucket"
   },
   "dependencies": {
     "axios": "^0.18.0",

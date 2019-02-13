@@ -1,11 +1,9 @@
 /** Header */
 import AccountHeader from '@/components/header/AccountHeader'
 /** Content */
-import SignIn from '@/components/common/SignIn'
-import SignUpPopUp from '@/components/common/SignUpPopUp'
-
-/** Footer */
-import Footer from '@/components/common/Footer'
+import SignIn from '@/components/body/common/SignIn'
+/** footer */
+import Footer from '@/components/footer/Footer'
 
 export const common = [
   {
@@ -15,14 +13,6 @@ export const common = [
       header: AccountHeader,
       default: SignIn,
       footer: Footer
-    }
-  },
-  {
-    path: '/common/signup_popup',
-    name: 'signUpPopUp',
-    components: {
-      header: AccountHeader,
-      default: SignUpPopUp
     }
   }
 ]
