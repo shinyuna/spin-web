@@ -119,7 +119,7 @@ export default {
 </script>
 
 <style scoped>
-  @import '../../../assets/css/adv_campaign.css';
+  @import '../../../assets/css/campaign.css';
 
   .camp_wrap{
     position: relative;

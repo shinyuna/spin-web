@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import { common } from './common'
 import { advertiser } from './advertiser'
+import { influencer } from './influencer'
 
 Vue.use(Router)
 
@@ -14,5 +15,5 @@ export default new Router({
       name: 'HelloWorld',
       component: HelloWorld
     }
-  ].concat(common, advertiser)
+  ].concat(common, advertiser, influencer)
 })

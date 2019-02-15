@@ -90,7 +90,7 @@
 </script>
 
 <style scoped>
-@import '../../../assets/css/adv_campaign.css';
+@import '../../../assets/css/campaign.css';
   .state_wrap{position: relative;}
   .state_wrap:after{content: ''; display: block; clear: both;}
   .state_box li > a{

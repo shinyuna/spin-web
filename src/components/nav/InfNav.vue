@@ -10,11 +10,11 @@
             <div class="image">
                 <img src="http://file2.nocutnews.co.kr/newsroom/image/2018/07/18/20180718120948825781_0_420_600.jpg" alt="profile image">
             </div>
-            <p class="user_name">${userName}</p>
+            <p class="user_name"></p>
         </div>
         <ul class="nav_gnb">
             <li class="nav_on"><router-link to="/influencer/inf_campaign_management">캠페인 관리</router-link></li>
-            <li><router-link to="/influencer/inf_campaign_list">캠페인 목록</router-link></li>
+            <li><router-link to="/influencer/campaign_list">캠페인 목록</router-link></li>
             <li class="setting">
                 <router-link to="/influencer/inf_my_info">설정</router-link>
             </li>
